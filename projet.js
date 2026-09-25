@@ -1,7 +1,7 @@
 p = require("prompt-sync")()
 let choix 
 let choix2
-
+let choix3 
 
 
 
@@ -26,7 +26,7 @@ function ajouter_seulC (condidat) {
     let partiPolitique = p("PartiPolitique  : ")
     let age = Number (p (" age : "))
 
-    let condidat1 = {
+    var  objet = {
         cin:cin,
         nom: nom,
         prenom: prenom,
@@ -34,7 +34,7 @@ function ajouter_seulC (condidat) {
         age :age ,
         electeurs : electeurs=[]
     }
-    condidat.push(condidat1)
+    condidat.push(objet)
 }
 // function d'ajouter plesieurs
 function ajouter_plus (condidat) {
@@ -110,8 +110,71 @@ function afficher(condidat) {
         console.log(nomv,"Désolé, vous ne pouvez pas voter deux fois")
      }
  }
+ // recherche par cin=====================================================
+ function Recherche_cin(condidat) {
+    trouver = false 
+    let i=-1 
+   let cin_recherchet = p("donner moi le CIN de condidat qui tu veut ")
+    for ( i = 0; i <condidat.length; i++) {
+         if (cin_recherchet == condidat[i].cin) {
+               trouver = true 
+               console.log("candidat numéro ",i)
+               break
+         } 
+    }
+  return i ; 
+ }
+ // modufication de parti politique========================================
+function modifier_partie(condidat) {
+    let i = Recherche_cin(condidat)
+    if ( i !== -1 ) {
+        let parti_modiefie = p("donner moi la nouvelle parti plitique ")
+        condidat[i].partiPolitique = parti_modiefie
+    }else{
+        console.log(" cet condidat ne trouve pas ");
+        
+    }
+}
+ //modification de l'age ==================================================
+function modifier_age(condidat) {
+    let i = Recherche_cin(condidat)
+    if ( i !== -1 ) {
+        let age_modiefie = Number (p("donner moi le neuveux age "))
+        condidat[i].age = age_modiefie
+    }else{
+        console.log(" cet condidat ne trouve pas ");
+        
+    }
+ }
 // la modification=========================================================
-
+function modification(condidat) {
+    do {
+    console.log("1.Modifier le parti politique d'un candidat ")
+    console.log("2.Modifier l'âge d'un candidat")
+    console.log("0.Quitter ")
+    choix3 =Number(p("entrer votre choix")) 
+    switch (choix3) {
+        case 1:
+            modifier_partie(condidat)
+            break;
+        case 2:
+            modifier_age(condidat)
+            break;
+        default:
+            break;
+    }
+    
+} while (choix3!=0);
+}
+// supprimer================================================================
+function supprimer(condidat) {
+    let i = Recherche_cin(condidat) 
+    if(i!=-1){
+        condidat.splice(i,1)
+    }else{
+        console.log(" cet condidat ne trouve pas ");
+    }
+}
 // Rechercher============================================================== 
 function Rechercher(condidat) {
    let nom_recherchet = p("donner moi le nom de condidat qui tu veut recherche ")
@@ -120,8 +183,7 @@ function Rechercher(condidat) {
                console.log(condidat[i]);    
          }else{
             console.log("cet nom ne trouve pas !")
-         }
-        
+         }  
     }
 }
  
@@ -131,8 +193,8 @@ do{
    console.log("1- ajouter les condidat  ");
    console.log("2- afficher list des condidats ");
    console.log("3- voter pour un condidat");
-   console.log("4-   ");
-   console.log("5- " );
+   console.log("4- Modification  ");
+   console.log("5- supprimer" );
    console.log("6- " );
    console.log("7- recherche par nom " );
    console.log("0- quitter" );
@@ -155,10 +217,11 @@ do{
         voter(condidat)
         break;
     case 4:
-       
+        console.clear()
+        modification(condidat)
         break;
     case 5:
-       
+        supprimer(condidat)
         break;
     case 6:
        
