@@ -2,39 +2,81 @@ p = require("prompt-sync")()
 let choix 
 let choix2
 let choix3 
-
+let choix4
 
 
 let condidat = [
-   {
-	cin : "AB123456",
-	nom : "Boushaba",
-	prenom : "Soufiane",
-	partiPolitique : "Indépendant",
-	age: 40,
-	electeurs: []
-}];
-
-
-
+    {
+        cin: "AB123456",
+        nom: "Boushaba",
+        prenom: "Soufiane",
+        partiPolitique: "Indépendant",
+        age: 40,
+        electeurs: ["AA111111", "AA222222"]
+    },
+    {
+        cin: "CD789012",
+        nom: "Alaoui",
+        prenom: "Yassine",
+        partiPolitique: "Parti A",
+        age: 35,
+        electeurs: ["BB111111", "BB222222", "BB333333", "BB444444", "BB555555"]
+    },
+    {
+        cin: "EF345678",
+        nom: "Amrani",
+        prenom: "Sara",
+        partiPolitique: "Parti B",
+        age: 29,
+        electeurs: ["CC111111"]
+    },
+    {
+        cin: "GH901234",
+        nom: "Benali",
+        prenom: "Omar",
+        partiPolitique: "Parti A",
+        age: 45,
+        electeurs: ["DD111111", "DD222222", "DD333333"]
+    },
+    {
+        cin: "IJ567890",
+        nom: "Fassi",
+        prenom: "Nadia",
+        partiPolitique: "Indépendant",
+        age: 38,
+        electeurs: []
+    }
+];
 // ajouter=============================================================================== 
 // function d'ajouter un seul condidat
 function ajouter_seulC (condidat) {
-    let cin = p("CIN : ")
-    let nom = p("Nom : ")
-    let prenom = p("Prenom : ")
-    let partiPolitique = p("PartiPolitique  : ")
-    let age = Number (p (" age : "))
-
-    var  objet = {
-        cin:cin,
-        nom: nom,
-        prenom: prenom,
-        partiPolitique: partiPolitique,
-        age :age ,
-        electeurs : electeurs=[]
+  let trouver = false
+  let cin = p("CIN : ")
+  let c = cin.toUpperCase()
+    for (let i = 0; i < condidat.length; i++) {
+        if (c == condidat[i].cin.toUpperCase() ) {
+             trouver = true
+        }
     }
-    condidat.push(objet)
+        if (trouver == true  ) {
+              console.log(" cet cin est deja utiliser ");
+        }else{
+        
+               var nom = p("Nom : ")
+               var prenom = p("Prenom : ")
+               var partiPolitique = p("PartiPolitique  : ")
+               var age = Number (p (" age : "))
+               var  objet = {
+                 cin:cin,
+                 nom: nom,
+                 prenom: prenom,
+                 partiPolitique: partiPolitique,
+                 age :age ,
+                 electeurs : electeurs=[]
+                }
+               condidat.push(objet)
+        } 
+    
 }
 // function d'ajouter plesieurs
 function ajouter_plus (condidat) {
@@ -55,14 +97,10 @@ function ajouter(condidat) {
     choix2 =Number(p("entrer votre choix "))
     switch (choix2) {
         case 1:
-            console.clear()
             ajouter_seulC (condidat)
-            console.clear()
             break;
         case 2:
-            console.clear()
             ajouter_plus (condidat)
-            console.clear()
             break;
         default:
             break;
@@ -70,8 +108,55 @@ function ajouter(condidat) {
 
     } while (choix2!=0);
 }
-// afficher=================================================================
-function afficher(condidat) {
+// affichage selon filtre
+function afficher_filtre(condidat) {
+    let parti_plitique = p(" donner moi la parti poltique qui tu veux afficher ")
+        for (let i = 0; i < condidat.length; i++) {
+            if (parti_plitique == condidat[i].partiPolitique ) {
+                console.log("--------------------condidat---------------------")
+                   console.log("* condidat",i,"*")
+                   console.log('CIN : ',condidat[i].cin);
+                   console.log('Nom : ',condidat[i].nom);
+                   console.log('Prenom : ',condidat[i].prenom);
+                   console.log('PartiPolitique  :',condidat[i].partiPolitique);
+                   console.log('Age :',condidat[i].age);
+                   console.log('Electeurs : ',condidat[i].electeurs);
+                   console.log('_____________________________________')             
+
+       }
+    
+}
+}
+// affichage selon trier------------------------
+function afficher_Trier(condidat) {
+       for (let i = 0; i < condidat.length - 1; i++) {
+             for (let j = i+1; j < condidat.length; j++) {
+                   let temp 
+                   if (condidat[i].electeurs.length < condidat[j].electeurs.length) {
+                          temp = condidat[i];
+                          condidat[i] = condidat[j]
+                          condidat[j] = temp
+                   }
+             }
+       }
+       console.log("--------------------condidat---------------------")
+      for (let i = 0; i < condidat.length; i++) {
+           console.log("* condidat",i,"*")
+           console.log('CIN : ',condidat[i].cin);
+           console.log('Nom : ',condidat[i].nom);
+           console.log('Prenom : ',condidat[i].prenom);
+           console.log('PartiPolitique  :',condidat[i].partiPolitique);
+           console.log('Age :',condidat[i].age);
+           console.log('Electeurs : ',condidat[i].electeurs);
+           console.log('_____________________________________')
+       
+    
+  }    
+        
+    
+} 
+// affichage simple 
+function afficher_simple(condidat) {
  console.log("+++++++++++ les condidat +++++++++++")
   for (let i = 0; i < condidat.length; i++) {
        console.log("* condidat",i,"*")
@@ -86,29 +171,59 @@ function afficher(condidat) {
     
   }
 }
+// afficher=================================================================
+function afficher(condidat){
+ do {
+    console.log("1- affichage simple")
+    console.log("2- affichage selon Trier les candidats par nombre de votes")
+    console.log("3- affichage selon uniquement les candidats d'un parti politique spécifique.")
+    console.log("0-quiter");
+     choix4 = Number(p("entrer votre choix"))
+    switch (choix4) {
+        case 1:
+            afficher_simple(condidat)
+            break;
+        case 2:
+            afficher_Trier(condidat)
+            break;
+        case 3:
+            afficher_filtre(condidat)
+            break;
+    
+        default:
+            break;
+    }
+    
+ } while (choix4 != 0);
+}
 // Voter pour un candidat ===================================================== 
  function voter(condidat) {
     console.log(" salut ")
     let nomv = p("doner moi votre nom ")
     let cin1 = p("donner moi votre cin ")
+    let c = cin1.toUpperCase()
     trouver = true
     for (let i = 0; i <condidat.length; i++) {
          for (let j = 0; j <condidat[i].electeurs.length; j++) {
-             if (cin1 ==condidat[i].electeurs[j]) {
+             if (cin1 == condidat[i].electeurs[j].toUpperCase()) {
                  trouver = true
+                 break;
              } 
          }  
     }
-    if (trouver) {
-     let cin2 = p(" donner moi le cin de condidat pour lequel vous allez voter ")
-     for (let i = 0; i < condidat.length; i++) {
-         if (cin2 == condidat[i].cin ) {
-             condidat[i].electeurs.push(cin1)
-         }  
-     }
-     }else{
-        console.log(nomv,"Désolé, vous ne pouvez pas voter deux fois")
-     }
+    if (trouver == true ) {
+         console.log(nomv,"Désolé, vous ne pouvez pas voter deux fois")
+    }else{
+        
+        let cin2 = p(" donner moi le cin de condidat pour lequel vous allez voter ")
+          for (let i = 0; i < condidat.length; i++) {
+                if (cin2 == condidat[i].cin ) {
+                    condidat[i].electeurs.push(cin1)
+                }else{
+                    console.log(" cet cin ne trouve pas ")
+                }break ;
+          }
+    }
  }
  // recherche par cin=====================================================
  function Recherche_cin(condidat) {
@@ -195,8 +310,8 @@ do{
    console.log("3- voter pour un condidat");
    console.log("4- Modification  ");
    console.log("5- supprimer" );
-   console.log("6- " );
-   console.log("7- recherche par nom " );
+   console.log("6- recherche par nom ");
+   console.log("7-  " );
    console.log("0- quitter" );
    
   choix =Number(p("donner moi votre choix "))
@@ -224,11 +339,11 @@ do{
         supprimer(condidat)
         break;
     case 6:
-       
+        console.clear()
+        Rechercher(condidat)
         break;
     case 7:
-       console.clear()
-       Rechercher(condidat)
+       
         break;
  
     default:
