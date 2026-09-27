@@ -69,11 +69,11 @@ function ajouter_seulC(condidat) {
   if (trouver == true) {
     console.log(" cet cin est deja utiliser ");
   } else {
-    var nom = p("Nom : ");
-    var prenom = p("Prenom : ");
-    var partiPolitique = p("PartiPolitique  : ");
-    var age = Number(p(" age : "));
-    var objet = {
+    let nom = p("Nom : ");
+    let prenom = p("Prenom : ");
+    let partiPolitique = p("PartiPolitique  : ");
+    let age = Number(p(" age : "));
+    let objet = {
       cin: cin,
       nom: nom,
       prenom: prenom,
@@ -226,25 +226,24 @@ function voter(condidat) {
   }
 }
 // recherche par cin=====================================================
-function Recherche_cin(condidat) {
-  trouver = false;
+function Recherche_cin() {
   let i = -1;
   let cin_recherchet = p("donner moi le CIN de condidat qui tu veut ");
-  for (i = 0; i < condidat.length; i++) {
-    if (cin_recherchet == condidat[i].cin) {
-      trouver = true;
-      console.log("candidat numéro ", i);
+  for (j = 0; j < condidat.length; j++) {
+    if (cin_recherchet == condidat[j].cin) {
+        i = j ;
       break;
-    }
+    } 
   }
+  console.log(i)
   return i;
 }
 // modufication de parti politique========================================
-function modifier_partie(condidat) {
+function modifier_partie() {
   let i = Recherche_cin(condidat);
-  if (i !== -1) {
+  if (i !== -1 ) {
     let parti_modiefie = p("donner moi la nouvelle parti plitique ");
-    condidat[i].partiPolitique = parti_modiefie;
+          condidat[i].partiPolitique = parti_modiefie;
   } else {
     console.log(" cet condidat ne trouve pas ");
   }
@@ -262,10 +261,14 @@ function modifier_age(condidat) {
 // la modification=========================================================
 function modification(condidat) {
   do {
-    console.log("1.Modifier le parti politique d'un candidat ");
-    console.log("2.Modifier l'âge d'un candidat");
-    console.log("0.Quitter ");
-    choix3 = Number(p("entrer votre choix"));
+    console.log("***************************************************")
+    console.log("*                 MODIFICATION                    *")
+    console.log("***************************************************")
+    console.log("* 1.Modifier le parti politique d'un candidat     *");
+    console.log("* 2.Modifier l'âge d'un candidat                  *");
+    console.log("* 0.Quitter                                       *");
+    console.log("***************************************************")
+    choix3 = Number(p("entrer votre choix "));
     switch (choix3) {
       case 1:
         modifier_partie(condidat);
@@ -274,6 +277,7 @@ function modification(condidat) {
         modifier_age(condidat);
         break;
       default:
+        console.log("cet choix ne trouve pas")
         break;
     }
   } while (choix3 != 0);
@@ -289,15 +293,27 @@ function supprimer(condidat) {
 }
 // Rechercher==============================================================
 function Rechercher(condidat) {
+  let trouver = false 
+  let i = 0 ;
   let nom_recherchet = p(
     "donner moi le nom de condidat qui tu veut recherche ",
   );
-  for (let i = 0; i < condidat.length; i++) {
+  for (i = 0; i < condidat.length; i++) {
     if (nom_recherchet == condidat[i].nom) {
-      console.log(condidat[i]);
-    } else {
-      console.log("cet nom ne trouve pas !");
+       trouver = true
+       break 
     }
+  }
+  if (trouver) {
+      console.log("trouver avec succe .......")
+      console.log("ces information ")
+      console.log("nom : ",condidat[i].nom)
+      console.log("prenom :",condidat[i].prenom)
+      console.log("age :",condidat[i].age)
+      console.log("la parti plitique :",condidat[i].partiPolitique)
+      console.log("nombre de vote :",condidat[i].electeurs.length)
+  }else{
+     console.log("cet nom ne se trouve pas dans la list des condidats")
   }
 }
 // afficher les 3 top ================
@@ -350,7 +366,13 @@ for (let i = 0; i < condidat.length; i++) {
 function statistiques(condidat) {
   do {
     console.log(
-      ".........................MUNI.........................................",
+      "......................................................................",
+    );
+        console.log(
+      ".                            STATISTIQUE                             .",
+    );
+        console.log(
+      "......................................................................",
     );
     console.log(
       ". 1- Afficher le Top 3 des candidats ayant le plus de votes          .",
@@ -365,9 +387,12 @@ function statistiques(condidat) {
       ". 4- Afficher le nombre de candidats par parti politique.            .",
     );
     console.log(
+      ". 0- Quitter                                                         .",
+    );
+    console.log(
       "......................................................................",
     );
-    choix5 = Number(p("entrer votre choix"));
+    choix5 = Number(p("entrer votre choix "));
     switch (choix5) {
       case 1:
         trois_top(condidat);
@@ -389,16 +414,18 @@ function statistiques(condidat) {
 
 // =======================================================
 do {
-  console.log("==============MUNI===============");
-  console.log("1- ajouter les condidat  ");
-  console.log("2- afficher list des condidats ");
-  console.log("3- voter pour un condidat");
-  console.log("4- Modification  ");
-  console.log("5- supprimer");
-  console.log("6- recherche par nom ");
-  console.log("7- statistique ");
-  console.log("0- quitter");
-
+  console.log("===================================");
+  console.log("=        MUNI PRINCIPALE          =");
+  console.log("===================================");
+  console.log("= 1- ajouter les condidat         =");
+  console.log("= 2- afficher list des condidats  =");
+  console.log("= 3- voter pour un condidat       =");
+  console.log("= 4- Modification                 =");
+  console.log("= 5- supprimer                    =");
+  console.log("= 6- recherche par nom            =");
+  console.log("= 7- statistique                  =");
+  console.log("= 0- quitter                      =");
+  console.log("===================================");
   choix = Number(p("donner moi votre choix "));
 
   switch (choix) {
