@@ -79,7 +79,7 @@ function ajouter_seulC(condidat) {
       prenom: prenom,
       partiPolitique: partiPolitique,
       age: age,
-      electeurs: (electeurs = []),
+      electeurs: (electeurs = []), 
     };
     condidat.push(objet);
   }
@@ -126,7 +126,7 @@ function afficher_filtre(condidat) {
       console.log("PartiPolitique  :", condidat[i].partiPolitique);
       console.log("Age :", condidat[i].age);
       console.log("les nombres de vote : ", condidat[i].electeurs.length);
-      console.log("_____________________________________");
+      console.log("__________________________________________________");
     }
   }
 }
@@ -200,7 +200,8 @@ function voter(condidat) {
   let nomv = p("doner moi votre nom ");
   let cin1 = p("donner moi votre cin ");
   let c = cin1.toUpperCase();
-  trouver = true;
+  let trouver = false;
+  let i = Recherche_cin()
   for (let i = 0; i < condidat.length; i++) {
     for (let j = 0; j < condidat[i].electeurs.length; j++) {
       if (cin1 == condidat[i].electeurs[j].toUpperCase()) {
@@ -212,17 +213,12 @@ function voter(condidat) {
   if (trouver == true) {
     console.log(nomv, "Désolé, vous ne pouvez pas voter deux fois");
   } else {
-    let cin2 = p(
-      " donner moi le cin de condidat pour lequel vous allez voter ",
-    );
-    for (let i = 0; i < condidat.length; i++) {
-      if (cin2 == condidat[i].cin) {
-        condidat[i].electeurs.push(cin1);
-      } else {
-        console.log(" cet cin ne trouve pas ");
-      }
-      break;
-    }
+         if (i!=-1) {
+                 condidat[i].electeurs.push(cin1);
+                 console.log("votre vote est fais avec succee ")
+         }else{
+                console.log("cet cin n'excite pas ")
+         }
   }
 }
 // recherche par cin=====================================================
@@ -235,7 +231,7 @@ function Recherche_cin() {
       break;
     } 
   }
-  console.log(i)
+  
   return i;
 }
 // modufication de parti politique========================================
@@ -330,14 +326,8 @@ function trois_top(condidat) {
   }
   console.log("--------------------condidat---------------------");
   for (let i = 0; i < 3; i++) {
-    console.log("* condidat", i, "*");
-    console.log("CIN : ", condidat[i].cin);
-    console.log("Nom : ", condidat[i].nom);
-    console.log("Prenom : ", condidat[i].prenom);
-    console.log("PartiPolitique  :", condidat[i].partiPolitique);
-    console.log("Age :", condidat[i].age);
-    console.log("les nombres de vote : ", condidat[i].electeurs.length);
-    console.log("_____________________________________");
+    console.log( condidat[i].nom,condidat[i].prenom,"les votes : ", condidat[i].electeurs.length);
+    console.log("_______________________________________________-");
   }
 }
 //nombre total =========
