@@ -457,4 +457,4 @@ do {
   }
 } while (choix != 0);
 console.clear();
-console.log(" thnaks ");
+console.log(" Merci ");
