@@ -95,10 +95,12 @@ function ajouter_plus(condidat) {
 // le muni dajout
 function ajouter(condidat) {
   do {
-    console.log("Tu veux ajouter 1 seul condidat ou plesieurs condidat");
-    console.log("1. un seul condidat");
-    console.log("2. pelusieurs");
-    console.log("0. retour a meni principal");
+    console.log("~~~~~~~~~~~~~~~~~~~~MUNI D'AJOUT~~~~~~~~~~~~~~~~~~~~~~~")
+    console.log("~Tu veux ajouter 1 seul condidat ou plesieurs condidat~");
+    console.log("~1. un seul condidat                                  ~");
+    console.log("~2. pelusieurs                                        ~");
+    console.log("~0. retour a meni principal                           ~");
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
     choix2 = Number(p("entrer votre choix "));
     switch (choix2) {
       case 1:
@@ -171,12 +173,15 @@ function afficher_simple(condidat) {
 // afficher=================================================================
 function afficher(condidat) {
   do {
-    console.log("1- affichage simple");
-    console.log("2- affichage selon Trier les candidats par nombre de votes");
-    console.log(
-      "3- affichage selon uniquement les candidats d'un parti politique spécifique.",
-    );
-    console.log("0-quiter");
+    console.log("``````````````````````````````````````````````````````````````````````````````");
+    console.log("``````                            AFICHAGE                              ``````");
+    console.log("``````````````````````````````````````````````````````````````````````````````");
+    console.log("`1- affichage simple                                                         `");
+    console.log("`2- affichage selon Trier les candidats par nombre de votes                  `");
+    console.log("`3- affichage selon uniquement les candidats d'un parti politique spécifique.`");
+    console.log("`0-quiter                                                                    `");
+    console.log("``````````````````````````````````````````````````````````````````````````````");
+    
     choix4 = Number(p("entrer votre choix"));
     switch (choix4) {
       case 1:
